@@ -9,7 +9,7 @@ const auth = getAuth(app);
 
 onAuthStateChanged(auth, (user) => {
     if (!user){
-        window.location.href = '/website/login.html';
+        window.location.href = '/login.html';
     }
 });
 

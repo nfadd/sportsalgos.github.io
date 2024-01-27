@@ -23,7 +23,7 @@ document.getElementById("sign-up").addEventListener("click", (e) => {
 
                 setPersistence(auth, browserSessionPersistence);
 
-                window.location.href = "/website/picks.html";
+                window.location.href = "/picks.html";
             })
             .catch((error) => {
                 const errorCode = error.code;
