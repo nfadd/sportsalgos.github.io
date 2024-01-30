@@ -1,44 +1,52 @@
 <!DOCTYPE html>
-
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Sports Algos</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script> -->
+        <script type="module" src="results.js"></script>
+        <link rel="stylesheet" href="results.css">
+        <title>Results</title>
     </head>
 
     <body>
-       <header class="main-header">
-        <div class="header-upper">
-            <nav class="navbar">
-                <div class="container">
-                    <a class="navbar-logo" href="#">
-                        <img src="" alt="Sports Algos Logo", class=""></img>
-                    </a>
-                    <div class="navbar-collapse">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="results.html">Results</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="picks.html">Picks</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="https://twitter.com/sportsalgos34">
-                                    <img src="" alt="X" class=""></img>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Subscribe</a>
-                            </li>
-                        </ul>
+        <section id="header">
+            <div class="back">
+                <a href="index.html">&larr; Back</a>
+            </div>
+            <div class="header-upper">
+                <nav class="navbar">
+                    <div class="container">
+                        <a class="image" href="index.html">
+                            <img src="images/Algos Logo.png" alt="Sports Algos Logo", class="logo"/>
+                        </a>
                     </div>
-                </div>
-            </nav>
-        </div>
-       </header>
+                </nav>
+            </div>
+        </section>
 
+       <div class="results-table">
+            <div class="sports-tables">
+                <label for="sports">Choose sport:</label>
+                <select name="sports" id="sports">
+                    <option value="cbb">CBB</option>
+                    <!-- <option value="mlb">MLB</option> -->
+                </select>
+            </div>
+            <table class="sortable">
+                <thead>
+                    <tr>
+                        <th>Grade</th>
+                        <th>Wins</th>
+                        <th>Losses</th>
+                        <th>Percent</th>
+                    </tr>
+                </thead>
+                <tbody id="results-body">
 
+                </tbody>
+            </table>
+       </div>
     </body>
 </html>
