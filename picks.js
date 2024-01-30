@@ -25,8 +25,8 @@ docSnap.forEach(doc => {
             let row = `<tr>
                             <td>${doc.data()[val].away_team}</td>
                             <td>${doc.data()[val].home_team}</td>
-                            <td>${doc.data()[val].predicted_ml_to_spread}</td>
-                            <td>${doc.data()[val].ml_to_spread_picks}</td>
+                            <td>${doc.data()[val].predicted_spread}</td>
+                            <td>${doc.data()[val].spread_picks}</td>
                             <td>${doc.data()[val].grade}</td>
                         </tr>`;
             let table = document.getElementById('picks-body');
