@@ -34,21 +34,24 @@
                     <!-- <option value="mlb">MLB</option> -->
                 </select>
             </div>
-            <table class="sortable">
-                <thead>
-                    <tr>
-                        <th>Away Team</th>
-                        <th>Home Team</th>
-                        <!-- <th>Line Home Spread</th> -->
-                        <th>Predicted Home Spread</th>
-                        <th>Picks</th>
-                        <th>Grade</th>
-                    </tr>
-                </thead>
-                <tbody id="picks-body">
-
-                </tbody>
-            </table>
+            <div class="picks-table">
+                <input type="text" id="search-bar" placeholder="Search teams...">
+                <table class="sortable" id="picks-table">
+                    <thead>
+                        <tr>
+                            <th>Away Team</th>
+                            <th>Home Team</th>
+                            <!-- <th>Line Home Spread</th> -->
+                            <th>Predicted Home Spread</th>
+                            <th>Picks</th>
+                            <th>Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody id="picks-body">
+    
+                    </tbody>
+                </table>
+            </div>
        </div>
     </body>
 </html>

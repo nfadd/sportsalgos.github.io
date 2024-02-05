@@ -463,3 +463,11 @@ table tbody tr {
     margin-left: 20px;
     font-family: sans-serif;
 }
+
+#search-bar {
+    margin: 25px auto 25px;
+    padding: 12px 20px;
+    display: flex;
+    width: 50%;
+    border: 1px solid #8a8989;
+}
