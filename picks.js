@@ -60,7 +60,7 @@ for (const cell of document.getElementsByTagName("td")){
 document.getElementById("search-bar").addEventListener("keyup", (e) => {
     var input, filter, found, table, tr, td, i, j;
     input = document.getElementById("search-bar");
-    filter = input.value;
+    filter = input.value.toLowerCase();
     table = document.getElementById("picks-body");
     tr = table.getElementsByTagName("tr");
 
