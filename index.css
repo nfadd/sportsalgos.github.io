@@ -76,11 +76,11 @@ h1 a, h2 a {
 }
 
 h2 {
-    font-size: 1.5em;
+    color: #444cac;
 }
 
 a {
-    color: #d52349;
+    color: #444cac;
     text-decoration: underline;
 }
 
@@ -89,6 +89,7 @@ a {
     }
 
 p {
+    font-weight: 500;
     margin-bottom: 2em;
 }
 
@@ -258,9 +259,9 @@ p {
                 }
     }
 
-section {
-    margin-bottom: 2.5em;
-}
+/* section {
+    margin-bottom: 1.5em;
+} */
 
     section > :last-child, section:last-child, article > :last-child, article:last-child {
         margin-bottom: 0;
@@ -283,13 +284,13 @@ footer {
 
 button,
 .button {
-    -webkit-appearance: none;
+    /* -webkit-appearance: none; */
     display: inline-block;
     text-decoration: none;
     cursor: pointer;
     border: 0;
     border-radius: 5px;
-    background: #d52349;
+    background: #444cac;
     color: #fff !important;
     font-weight: 700;
     outline: 0;
@@ -304,12 +305,12 @@ button,
 
     button:hover,
     .button:hover {
-        background: #e53359;
+        background: #7db0f2;
     }
 
     button:active,
     .button:active {
-        background: #c51349;
+        background: #7db0f2;
     }
 
 .image {
@@ -341,18 +342,22 @@ button,
     }
 
 #banner {
-    background: #CCE8F4 url("../../images/pic01.jpg");
+    background: #CCE8F4 url("/sportsalgos.github.io/images/HfhONyYLBzoQo9DYRuCy--1--pxkc6.jpg");
     background-position: center center;
-    background-size: auto 100%;
+    /* background-size: auto 100%; */
     background-repeat: no-repeat;
     text-align: center;
     position: relative;
     padding: 8em 0;
     margin: 4em 0 0 0;
+
+    /* height: 100%; */
+    background-attachment: fixed;
+    background-size: cover;
 }
 
     #banner header {
-        background-color: rgba(34, 30, 31, 0.98);
+        background-color: #444cac;
         display: inline-block;
         padding: 2.5em 5em;
         border-radius: 5px;
@@ -366,7 +371,7 @@ button,
         }
 
         #banner header p {
-            color: #d52349;
+            color: #252122;
             padding: 0;
             font-style: normal;
             margin: 0;
@@ -385,6 +390,7 @@ button,
 
     #intro h2 {
         font-size: 1.75em;
+        margin: 10px;
     }
 
     #intro p {
@@ -431,7 +437,7 @@ button,
 #footer {
     position: relative;
     color: #858484;
-    padding: 4em 0;
+    padding: 2em 0;
 }
 
     #footer:before {
@@ -440,7 +446,7 @@ button,
         top: 0;
         left: 0;
         width: 100%;
-        background: url("images/bg01.png");
+        /* background: url("images/bg01.png"); */
         background-size: 100% 100%;
         z-index: 0;
         opacity: 0.5;
@@ -458,9 +464,9 @@ button,
             color: inherit;
         }
 
-    #footer header {
+    /* #footer header {
         margin: 0 0 3em 0;
-    }
+    } */
 
         #footer header h2 {
             font-size: 1.75em;
@@ -483,7 +489,7 @@ button,
 }
 
 .navbar ul li a:hover {
-    color: #f45960;
+    color: #7db0f2;
 }
 
 .navbar li a {
@@ -571,9 +577,9 @@ button,
                 height: 2.5em;
             }
 
-            #footer header {
+            /* #footer header {
                 margin: 0 0 1.5em 0;
-            }
+            } */
 
                 #footer header h2 {
                     font-size: 1.25em;

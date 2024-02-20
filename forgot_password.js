@@ -11,19 +11,24 @@ document.getElementById("submit").addEventListener("click", (e) => {
     var email = document.getElementById("email");
 
     sendPasswordResetEmail(auth, email.value)
-        .then((userCredential) => {
-            const user = userCredential.user;
-
+        .then(() => {
+            if (alert("Reset password link sent to email")) 
+                {}
+            else
+                window.location.href = "login.html";
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
 
             console.log(errorCode, errorMessage);
+
+            if (errorCode == "auth/invalid-email"){
+                email.setCustomValidity("Invalid email");
+                email.reportValidity();
+            } else if (errorCode == "auth/missing-email"){
+                email.setCustomValidity("Please enter an email");
+                email.reportValidity();
+            }
         });
-    
-    if (alert("Reset password link sent to email")) 
-        {}
-    else
-        window.location.href = "login.html";
 });
