@@ -5,6 +5,14 @@ import { firebaseConfig } from "./firebaseConfig.js";
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+function redirect() {
+    window.location.assign("https://square.link/u/yERExf6F");
+};
+
+async function checkOut() {
+    await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+};
+
 document.getElementById("sign-up").addEventListener("click", (e) => {
     var email = document.getElementById("sign-up-email");
     var password = document.getElementById("sign-up-password");
@@ -16,14 +24,15 @@ document.getElementById("sign-up").addEventListener("click", (e) => {
     } else {
         confirm_password.setCustomValidity('');
 
+        checkOut();
+
         //Sign up
         createUserWithEmailAndPassword(auth, email.value, password.value)
             .then((userCredential) => {
                 const user = userCredential.user;
 
                 setPersistence(auth, browserSessionPersistence);
-
-                window.location.href = "picks.html";
+                // window.location.href = "picks.html";
             })
             .catch((error) => {
                 const errorCode = error.code;
