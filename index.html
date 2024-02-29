@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" type="image/x-icon" href="images/Algos circle logo.ico">
         <link rel="stylesheet" href="index.css">
         <title>Sports Algos</title>
     </head>
@@ -20,9 +21,6 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="results.html" style="font-size: 18px; font-weight: 400;">Results</a>
                                 </li>
-                                <!-- <li class="nav-item">
-                                    <a class="nav-link" href="picks.html">Picks</a>
-                                </li> -->
                                 <li class="nav-item">
                                     <a class="image" href="https://twitter.com/sportsalgos34">
                                         <img src="images/twitter.png" alt="X" class="twitter" style="width: 25px; position: relative; top: 10px;"/>
@@ -103,9 +101,6 @@
                     <header>
                         <h2>About Our Team</h2>
                     </header>
-                    <!-- <a href="#" class="image">
-                        <img src="" alt=""></img>
-                    </a> -->
                     <p>At <span style="font-style: italic;">Sports Algos</span> our team of engineers are first and foremost sports fans. We are former collegiate athletes who turned our love for computers and data analysis into something tangible. We started <span style="font-style: italic;">Sports Algos</span> as a work-in-our-free-time project to share with close friends, but soon grew into something bigger. Thanks to all of you who share in our successes, we are able to continue expanding and improving our models every day to give you more accurate predictions.</p>
                     <footer>
                         <ul class="actions">
@@ -119,33 +114,4 @@
         </div>
     </section>
     </body>
-    <script>
-        jQuery(document).ready(function($) {
-          // Mobile device check
-          $is_mobile_device = null !== navigator.userAgent.match(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/);
-          if ($is_mobile_device) {
-            // Function to check if an element is in the Viewport
-            isInViewport = function(elem) {
-                elementTop = elem.offset().top, elementBottom = elementTop + elem.outerHeight(), viewportTop = $(window).scrollTop(), viewportBottom = viewportTop + $(window).height();
-                return elementBottom > viewportTop && elementTop < viewportBottom;
-            };
-            // Apply Parallax transform calculations when scrolling
-            $(window).scroll(function() {
-                $(".et_parallax_bg").each(function() {
-                   var $this_parent = $(this).parent();
-                   // Check if the parent element is on-screen
-                   var $is_visible = isInViewport($this_parent);
-                   if ($is_visible) {
-                     element_top = $this_parent.offset().top,
-                     parallaxHeight = $(this).pare
-        nt(".et_pb_fullscreen").length && $(window).height() > $this_parent.innerHeight() ? $(window).height() : $this_parent.innerHeight(),
-                     bg_height = .4 * $(window).height() + parallaxHeight,
-                     main_position = "translate(0, " + .4 * ($(window).scrollTop() + $(window).height() - element_top) + "px)";
-                     $(this).css({height: bg_height,"-webkit-transform": main_position,"-moz-transform": main_position,"-ms-transform": main_position,transform: main_position});
-                   }
-                });
-            });
-          }
-        });
-        </script>
 </html>

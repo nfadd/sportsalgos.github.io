@@ -6,6 +6,7 @@
         <!-- <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
         <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script> -->
         <script type="module" src="picks.js"></script>
+        <link rel="shortcut icon" type="image/x-icon" href="images/Algos circle logo.ico">
         <link rel="stylesheet" href="picks.css">
         <title>Picks</title>
     </head>
@@ -31,11 +32,14 @@
                 <label for="sports">Choose sport:</label>
                 <select name="sports" id="sports">
                     <option value="cbb">CBB</option>
-                    <!-- <option value="mlb">MLB</option> -->
+                    <option value="nba">NBA</option>
                 </select>
             </div>
             <div class="picks-table">
                 <input type="text" id="search-bar" placeholder="Search teams...">
+                <div id='picks-date'>
+                    
+                </div>
                 <table class="sortable" id="picks-table">
                     <thead>
                         <tr>
