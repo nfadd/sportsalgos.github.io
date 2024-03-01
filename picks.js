@@ -58,7 +58,8 @@ async function cbbTable() {
             } else if (val == 'date'){
                 let epochDate = doc.data()[val];
                 let date = new Date(epochDate*1000);
-                let row = `<h2>${(date.getMonth()+1)+"/"+(date.getDate()+1)+"/"+date.getFullYear()} Picks</h2>`;
+                date.setDate(date.getDate()+1);
+                let row = `<h2>${(date.getMonth()+1)+"/"+(date.getDate())+"/"+date.getFullYear()} Picks</h2>`;
                 let dateText = document.getElementById('picks-date');
                 dateText.innerHTML += row;
             }
@@ -87,7 +88,8 @@ async function nbaTable() {
             } else if (val == 'date'){
                 let epochDate = doc.data()[val];
                 let date = new Date(epochDate*1000);
-                let row = `<h2>${(date.getMonth()+1)+"/"+(date.getDate()+1)+"/"+date.getFullYear()} Picks</h2>`;
+                date.setDate(date.getDate()+1);
+                let row = `<h2>${(date.getMonth()+1)+"/"+(date.getDate())+"/"+date.getFullYear()} Picks</h2>`;
                 let dateText = document.getElementById('picks-date');
                 dateText.innerHTML += row;
             }
