@@ -32,6 +32,7 @@
             <div class="sports-tables">
                 <label for="sports">Choose sport:</label>
                 <select name="sports" id="sports">
+                    <option value="mlb">MLB</option>
                     <option value="cbb">CBB</option>
                     <option value="nba">NBA</option>
                 </select>
@@ -42,15 +43,8 @@
                     
                 </div>
                 <table class="sortable" id="picks-table">
-                    <thead>
-                        <tr>
-                            <th>Away Team</th>
-                            <th>Home Team</th>
-                            <!-- <th>Line Home Spread</th> -->
-                            <th>Predicted Home Spread</th>
-                            <th>Picks</th>
-                            <th>Grade</th>
-                        </tr>
+                    <thead id="picks-head">
+                        
                     </thead>
                     <tbody id="picks-body">
     
