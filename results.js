@@ -21,6 +21,10 @@ document.getElementById("sports").addEventListener("change", (e) => {
         // console.log("NBA");
         resetTable();
         nbaResultsTable();
+    } else if (sports == "mlb"){
+        // console.log("MLB");
+        resetTable();
+        mlbResultsTable();
     }
 });
 
@@ -88,6 +92,34 @@ async function nbaResultsTable() {
     gradeColor();
 }
 
+async function mlbResultsTable() {
+    const collRef = collection(db, "mlbrecords");
+    const q = query(collRef, orderBy("date", "desc"), limit(1));
+    const docSnap = await getDocs(q);
+
+    docSnap.forEach(doc => {
+        for(let val in doc.data()){
+            if (val != 'date'){
+                let row = `<tr>
+                                <td>${doc.data()[val].grade}</td>
+                                <td>${doc.data()[val].wins}</td>
+                                <td>${doc.data()[val].losses}</td>
+                                <td>${doc.data()[val].win_pct}</td>
+                            </tr>`;
+                let table = document.getElementById('results-body');
+                table.innerHTML += row;
+            } else if (val == 'date'){
+                let epochDate = doc.data()[val];
+                let date = new Date(epochDate*1000);
+                let row = `<h2>Updated through games on ${(date.getMonth()+1)+"/"+(date.getDate())+"/"+date.getFullYear()}</h2>`;
+                let dateText = document.getElementById('results-date');
+                dateText.innerHTML += row;
+            }
+        }
+    });
+    gradeColor();
+}
+
 //Color Code for Results Table
 function gradeColor() {
     const colors = {
@@ -95,8 +127,10 @@ function gradeColor() {
         "B": "#32cd32",
         "C": "#ffd700",
         "D": "#ff0000",
-        "F": "#b22222"
+        "F": "#b22222",
+        "Odds < -150": "#87CEEB",
     }
+
     for (const cell of document.getElementsByTagName("td")){
         if(cell.innerHTML == "A"){
             cell.style.backgroundColor = colors["A"];
@@ -107,7 +141,9 @@ function gradeColor() {
         } else if(cell.innerHTML == "D"){
             cell.style.backgroundColor = colors["D"];
         } else if(cell.innerHTML == "F"){
-            cell.style.backgroundColor = colors["F"]
+            cell.style.backgroundColor = colors["F"];
+        } else if(cell.innerHTML == "Odds &lt; -150"){
+            cell.style.backgroundColor = colors["Odds < -150"];
         }
     }
 }
