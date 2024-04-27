@@ -105,6 +105,7 @@ async function mlbResultsTable() {
                                 <td>${doc.data()[val].wins}</td>
                                 <td>${doc.data()[val].losses}</td>
                                 <td>${doc.data()[val].win_pct}</td>
+                                <td>${doc.data()[val]['profit (units)']}</td>
                             </tr>`;
                 let table = document.getElementById('results-body');
                 table.innerHTML += row;
