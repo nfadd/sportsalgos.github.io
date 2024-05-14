@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="module" src="index.js"></script>
         <link rel="manifest" href="manifest.json">
         <link rel="shortcut icon" type="image/x-icon" href="images/Algos circle logo.ico">
         <link rel="stylesheet" href="index.css">
@@ -12,35 +13,42 @@
     <body>
         <section id="header">
             <div class="header-upper">
-                <nav class="navbar">
-                    <div class="container">
-                        <a class="image" href="index.html">
-                            <img src="images/Algos Logo.png" alt="Sports Algos Logo", class="logo"/>
-                        </a>
+                <div class="container">
+                    <a class="image" href="index.html">
+                        <img src="images/Algos Logo.png" alt="Sports Algos Logo", class="logo" style="width: 125px;"/>
+                    </a>
+                    <div class="nav-toggle">
+                        <img id="navClosed" class="navIcon" src="https://www.richardmiddleton.me/wp-content/themes/richardcodes/assets/img/hamburger.svg" alt="hamburger menu">
+                        <img id="navOpen" class="navIcon hidden" src="https://www.richardmiddleton.me/wp-content/themes/richardcodes/assets/img/close.svg" alt="close hamburger">
+                    </div>
+                    <nav class="navbar">
                         <div class="navbar-collapse">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
                                     <a class="nav-link" href="results.html" style="font-size: 18px; font-weight: 400;">Results</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="image" href="https://twitter.com/sportsalgos34">
-                                        <img src="images/twitter.png" alt="X" class="twitter" style="width: 25px; position: relative; top: 10px;"/>
+                                    <a class="nav-link" href="login.html" style="font-size: 18px; font-weight: 400;">Member Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="https://twitter.com/sportsalgos34?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-screen-name="false" data-show-count="false">Follow @sportsalgos34</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="https://www.instagram.com/sportsalgos34/" style="display: flex; align-items: center;">
+                                        <img src="images/5296765_camera_instagram_instagram logo_icon.png" alt="Instagram" style="width: 20px;"/>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <ul class="actions">
-                                        <li>
+                                        <li >
                                             <a href="subscribe.html" class="button">Subscribe</a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="login.html" style="font-size: 18px; font-weight: 400;">Member Login</a>
-                                </li>
                             </ul>
                         </div>
-                    </div>
-                </nav>
+                    </nav>
+                </div>
             </div>
 
         <section id="banner">
@@ -56,39 +64,45 @@
             <div class="row">
                 <div class="intro">
                     <section class="first">
-                        <img src="" alt=""></img>
-                        <header>
-                            <h2>What We Provide</h2>
-                            <h1>Accurate Sports Predictions</h1>
-                        </header>
-                        <p>Use our advanced, data-driven sports model projections to grow financially. Thanks to the vast amount of data available online we are able to find value where others can't.</p>
+                        <img src="images/accuracy_graphic.png" alt="Dart board with sports equipment surrounding it" class="graphic" id="first_graphic"/>
+                        <div class="section_body">
+                            <header>
+                                <h2>What We Provide</h2>
+                                <h1>Accurate Sports Predictions</h1>
+                            </header>
+                            <p>Use our advanced, data-driven sports model projections to grow financially. Thanks to the vast amount of data available online we are able to find value where others can't.</p>
+                        </div>
                     </section>
                 </div>
                 <div class="intro">
                     <section class="second">
-                        <img src="" alt=""></img>
-                        <header>
-                            <h2>Our Plans</h2>
-                            <h1>Get Access</h1>
-                        </header>
-                        <p>Coming soon...</p>
-                        <footer style="padding-top: 20px;">
-                            <ul class="actions">
-                                <li>
-                                    <a href="#" class="button">Our Plans</a>
-                                </li>
-                            </ul>
-                        </footer>
+                        <img src="images/subscribe_graphic.png" alt="Subscribe button" class="graphic" id="second_graphic"/>
+                        <div class="section_body">
+                            <header>
+                                <h2>Our Plans</h2>
+                                <h1>Get Access</h1>
+                            </header>
+                            <p>Coming soon...</p>
+                            <footer style="padding-top: 20px;">
+                                <ul class="actions">
+                                    <li>
+                                        <a href="#" class="button" style="padding: 10px 20px;">Our Plans</a>
+                                    </li>
+                                </ul>
+                            </footer>
+                        </div>
                     </section>
                 </div>
                 <div class="intro">
                     <section class="third">
-                        <img src="" alt=""></img>
-                        <header>
-                            <h2>Models</h2>
-                            <h1>Machine Learning</h1>
-                        </header>
-                        <p>We are building advanced models in every major sport, continually optimizing them so you can get the most out of your experience. We use Machine Learning methods to more accurately predict outcomes.</p>
+                        <img src="images/models_graphic.png" alt="Computer screen" class="graphic"/>
+                        <div class="section_body">
+                            <header>
+                                <h2>Models</h2>
+                                <h1>Machine Learning</h1>
+                            </header>
+                            <p>We are building advanced models in every major sport, continually optimizing them so you can get the most out of your experience. We use Machine Learning methods to more accurately predict outcomes.</p>
+                        </div>
                     </section>
                 </div>
             </div>
@@ -106,7 +120,7 @@
                     <footer>
                         <ul class="actions">
                             <li>
-                                <a href="mailto:sportsalgos34@gmail.com" class="button">Contact Us</a>
+                                <a href="mailto:sportsalgos34@gmail.com" class="button" style="padding: 10px 20px;">Contact Us</a>
                             </li>
                         </ul>
                     </footer>
