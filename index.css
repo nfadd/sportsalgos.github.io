@@ -431,16 +431,6 @@ button,
     #intro footer {
         margin: 0;
     }
-    
-.section_body {
-    /* flex: 1; */
-    /* height: 50%; */
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* justify-content: end; */
-    /* align-items: center; */
-    
-}
 
 #footer {
     position: relative;
@@ -706,6 +696,11 @@ button,
         .container {
             flex-direction: column;
             align-items: flex-start;
+        }
+
+        .border {
+            width: 100%;
+            border-top: solid 1px #dfdfdf;
         }
 
         .nav-toggle {

@@ -165,3 +165,12 @@ img {
     width: 20%;
     margin: auto;
 }
+
+@media screen and (max-width: 768px) {
+
+    .subscribe-box {
+        width: calc(100% - 30px);
+        height: 430px;
+    }
+
+}
