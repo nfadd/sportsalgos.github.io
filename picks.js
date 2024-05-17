@@ -136,6 +136,9 @@ async function mlbTable() {
                             <th>Win Probability</th>
                             <th>Picks</th>
                             <th>Grade</th>
+                            <th>Over/Under Probability</th>
+                            <th>Picks</th>
+                            <th>Grade</th>
                         </tr>`;
 
     docSnap.forEach(doc => {
@@ -147,6 +150,9 @@ async function mlbTable() {
                                 <td>${(doc.data()[val].win_pct_proba * 100).toFixed(2)}%</td>
                                 <td>${doc.data()[val].win_pct_picks}</td>
                                 <td>${doc.data()[val].grade}</td>
+                                <td>${(doc.data()[val].totals_proba * 100).toFixed(2)}%</td>
+                                <td>${doc.data()[val].total_points_picks}</td>
+                                <td>${doc.data()[val].totals_grade}</td>
                             </tr>`;
                 let table = document.getElementById('picks-body');
                 table.innerHTML += row;
