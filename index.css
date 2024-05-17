@@ -501,6 +501,10 @@ button,
     text-decoration: none;
 }
 
+.navbar ul li a img:hover {
+    opacity: 0.5;
+}
+
 /* .navbar li {
     margin-left: 5rem;
 } */

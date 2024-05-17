@@ -423,18 +423,24 @@ table th {
 }
 
 table th, table td {
-    padding: 12px 15px;
+    padding: 12px 6px;
 }
 
 table tbody tr {
     border-bottom: 1px solid #dddddd;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
     /* horizontal scrollbar for tables if mobile screen */
     table {
         overflow-x: auto;
         display: block;
+    }
+
+    #picks-table {
+        /* padding: 5px; */
+        width: calc(100% - 40px);
+        font-size: 12px;
     }
 }
 
@@ -472,3 +478,4 @@ table tbody tr {
     width: 50%;
     border: 1px solid #8a8989;
 }
+
