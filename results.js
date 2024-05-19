@@ -74,7 +74,7 @@ async function cbbResultsTable() {
                             <th>Wins</th>
                             <th>Losses</th>
                             <th>Percent</th>
-                            <th>Profit (units)</th>
+                            <th>Results</th>
                         </tr>`;
 
     docSnap.forEach(doc => {
@@ -112,7 +112,7 @@ async function nbaResultsTable() {
                             <th>Wins</th>
                             <th>Losses</th>
                             <th>Percent</th>
-                            <th>Profit (units)</th>
+                            <th>Results</th>
                         </tr>`;
 
     docSnap.forEach(doc => {
@@ -150,7 +150,7 @@ async function mlbResultsTable(isML) {
                             <th>Wins</th>
                             <th>Losses</th>
                             <th>Percent</th>
-                            <th>Profit (units)</th>
+                            <th>Results</th>
                         </tr>`;
 
     let count = 0;
