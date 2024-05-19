@@ -460,7 +460,50 @@ table tbody tr {
     opacity: 0.9;
 }
 
+.input-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 20px 30px 20px;
+}
+
 .sports-tables {
-    margin-left: 20px;
     font-family: sans-serif;
+}
+
+.radio-container {
+    display: none;
+    flex-direction: row;
+}
+
+.radio-bets {
+    width: 6em;
+    /* position: relative; */
+}
+
+.radio-bets label,
+.radio-bets input {
+    position: absolute;
+    font-family: sans-serif;
+    padding: 8px;
+}
+
+.radio-bets input[type="radio"] {
+    opacity: 0.01;
+    z-index: 100;
+}
+
+.radio-bets input[type="radio"]:checked + label {
+    background: #444cac;
+    border-radius: 5px;
+    color: white;
+}
+
+.radio-bets label {
+    cursor: pointer;
+    z-index: 90;
+    /* line-height: 1.8em; */
+    text-align: center;
+    outline: 1px solid black;
+    border-radius: 5px;
 }

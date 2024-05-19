@@ -29,26 +29,32 @@
         </section>
 
        <div class="results-table">
-            <div class="sports-tables">
-                <label for="sports">Choose sport:</label>
-                <select name="sports" id="sports">
-                    <option value="cbb">CBB</option>
-                    <option value="nba">NBA</option>
-                    <option value="mlb">MLB</option>
-                </select>
+            <div class="input-container">
+                <div class="sports-tables">
+                    <label for="sports">Choose sport:</label>
+                    <select name="sports" id="sports">
+                        <option value="cbb">CBB</option>
+                        <option value="nba">NBA</option>
+                        <option value="mlb">MLB</option>
+                    </select>
+                </div>
+                <div class="radio-container" id="radio-container">
+                    <div class="radio-bets">
+                        <input type="radio" id="moneyline" name="bet-type" checked/>
+                        <label for="moneyline">Moneyline</label>
+                    </div>
+                    <div class="radio-bets">
+                        <input type="radio" id="over-under" name="bet-type" />
+                        <label for="over-under">Over/Under</label>
+                    </div>
+                </div>
             </div>
             <div id='results-date'>
                     
             </div>
             <table class="sortable" id="results-table">
-                <thead>
-                    <tr>
-                        <th>Grade</th>
-                        <th>Wins</th>
-                        <th>Losses</th>
-                        <th>Percent</th>
-                        <th>Profit (units)</th>
-                    </tr>
+                <thead id="results-head">
+                    
                 </thead>
                 <tbody id="results-body">
 
