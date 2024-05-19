@@ -15,18 +15,35 @@ document.getElementById("sports").addEventListener("change", (e) => {
     let sports = document.getElementById("sports").value;
     if(sports == "cbb"){
         // console.log("CBB");
+        hideRadioButtons();
         resetTable();
         cbbResultsTable();
     } else if (sports == "nba"){
         // console.log("NBA");
+        hideRadioButtons();
         resetTable();
         nbaResultsTable();
     } else if (sports == "mlb"){
         // console.log("MLB");
+        showRadioButtons();
         resetTable();
-        mlbResultsTable();
+        const isMoneylineChecked = document.getElementById("moneyline").checked;
+        mlbResultsTable(isMoneylineChecked);
     }
 });
+
+document.getElementById("moneyline").addEventListener("change", (e) => {
+    resetTable();
+    const isMoneylineChecked = document.getElementById("moneyline").checked;
+    mlbResultsTable(isMoneylineChecked);
+})
+
+document.getElementById("over-under").addEventListener("change", (e) => {
+    resetTable();
+    const isMoneylineChecked = document.getElementById("moneyline").checked;
+    mlbResultsTable(isMoneylineChecked);
+})
+
 
 function resetTable(){
     let table = document.getElementById('results-body');
@@ -36,10 +53,29 @@ function resetTable(){
     dateText.innerHTML = "";
 }
 
+function showRadioButtons() {
+    let radioButtons = document.getElementById('radio-container');
+    radioButtons.style.display = "flex";
+}
+
+function hideRadioButtons() {
+    let radioButtons = document.getElementById('radio-container');
+    radioButtons.style.display = "none";
+}
+
 async function cbbResultsTable() {
     const collRef = collection(db, "records");
     const q = query(collRef, orderBy("date", "desc"), limit(1));
     const docSnap = await getDocs(q);
+
+    let head = document.getElementById('results-head');
+    head.innerHTML =    `<tr>
+                            <th>Grade</th>
+                            <th>Wins</th>
+                            <th>Losses</th>
+                            <th>Percent</th>
+                            <th>Profit (units)</th>
+                        </tr>`;
 
     docSnap.forEach(doc => {
         for(let val in doc.data()){
@@ -70,6 +106,15 @@ async function nbaResultsTable() {
     const q = query(collRef, orderBy("date", "desc"), limit(1));
     const docSnap = await getDocs(q);
 
+    let head = document.getElementById('results-head');
+    head.innerHTML =    `<tr>
+                            <th>Grade</th>
+                            <th>Wins</th>
+                            <th>Losses</th>
+                            <th>Percent</th>
+                            <th>Profit (units)</th>
+                        </tr>`;
+
     docSnap.forEach(doc => {
         for(let val in doc.data()){
             if (val != 'date'){
@@ -94,21 +139,45 @@ async function nbaResultsTable() {
     gradeColor();
 }
 
-async function mlbResultsTable() {
+async function mlbResultsTable(isML) {
     const collRef = collection(db, "mlbrecords");
     const q = query(collRef, orderBy("date", "desc"), limit(1));
     const docSnap = await getDocs(q);
 
+    let head = document.getElementById('results-head');
+    head.innerHTML =    `<tr>
+                            <th>Grade</th>
+                            <th>Wins</th>
+                            <th>Losses</th>
+                            <th>Percent</th>
+                            <th>Profit (units)</th>
+                        </tr>`;
+
+    let count = 0;
     docSnap.forEach(doc => {
         for(let val in doc.data()){
             if (val != 'date'){
-                let row = `<tr>
+                let row = '';
+                if(isML) {
+                    row = `<tr>
                                 <td>${doc.data()[val].grade}</td>
                                 <td>${doc.data()[val].wins}</td>
                                 <td>${doc.data()[val].losses}</td>
                                 <td>${doc.data()[val].win_pct}</td>
                                 <td>${doc.data()[val]['profit (units)']}</td>
                             </tr>`;
+                } else {
+                    count++;
+                    if (count <= 5) {
+                        row = `<tr>
+                                    <td>${doc.data()[val].grade}</td>
+                                    <td>${doc.data()[val].totals_wins}</td>
+                                    <td>${doc.data()[val].totals_losses}</td>
+                                    <td>${doc.data()[val].totals_win_pct}</td>
+                                    <td>${doc.data()[val]['totals profit (units)']}</td>
+                                </tr>`;
+                    }
+                }
                 let table = document.getElementById('results-body');
                 table.innerHTML += row;
             } else if (val == 'date'){
