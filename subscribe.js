@@ -1,55 +1,58 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, setPersistence, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-auth.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-auth.js";
 import { firebaseConfig } from "./firebaseConfig.js";
+import { getCheckoutUrl } from "./processPayment.js";
+import { priceConfig } from "./priceConfig.js";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-function redirect() {
-    window.location.assign("https://square.link/u/yERExf6F");
-};
-
-async function checkOut() {
-    await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-};
-
-document.getElementById("sign-up").addEventListener("click", (e) => {
-    var email = document.getElementById("sign-up-email");
-    var password = document.getElementById("sign-up-password");
-    var confirm_password = document.getElementById("confirm-password");
-
-    if(password.value != confirm_password.value) {
-        confirm_password.setCustomValidity("Passwords Don't Match");
-        confirm_password.reportValidity();
-    } else {
-        confirm_password.setCustomValidity('');
-
-        checkOut();
-
-        //Sign up
-        createUserWithEmailAndPassword(auth, email.value, password.value)
-            .then((userCredential) => {
-                const user = userCredential.user;
-
-                setPersistence(auth, browserSessionPersistence);
-                // window.location.href = "picks.html";
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-
-                if(errorCode == "auth/missing-email"){
-                    email.setCustomValidity("Please enter an email");
-                    email.reportValidity();
-                } else if (errorCode == "auth/invalid-email"){
-                    email.setCustomValidity("Invalid email");
-                    email.reportValidity();
-                } else if (errorCode == "auth/weak-password"){
-                    password.setCustomValidity("Password must be at least 6 characters");
-                    password.reportValidity();
-                }
-
-                console.log(errorCode, errorMessage);
-            });
+onAuthStateChanged(auth, (user) => {
+    if (!user){
+        window.location.href = 'login.html';
     }
 });
+
+const subOptions = document.querySelectorAll(".subscribe-button");
+let priceId;
+
+subOptions.forEach((option) => {
+    option.addEventListener("click", async (e) => {
+        subOptions.forEach(option => option.classList.remove('active'));
+        option.classList.add("active");
+
+        priceId = option.id;
+    });
+})
+
+document.getElementById("sign-up").addEventListener("click", async (e) => {
+    var monthlySub = document.getElementById("monthly");
+    var yearlySub = document.getElementById("yearly");
+
+    if (monthlySub.classList.length == 1 && yearlySub.classList.length == 1) {
+        monthlySub.setCustomValidity("Please Select a Membership Package");
+        monthlySub.reportValidity();
+    } else {
+        monthlySub.setCustomValidity('');
+        
+        document.getElementsByClassName("subscribe-box")[0].style.display = "none";
+        document.getElementsByClassName("back")[0].style.display = "none";
+        document.getElementById("loader").style.display = "block";
+        await getPayment();
+        document.getElementById("loader").style.display = "none";
+    }
+});
+
+const getPayment = async () => {
+    try {
+        let checkoutUrl;
+        if (priceId == "monthly") {
+            checkoutUrl = await getCheckoutUrl(app, priceConfig.monthlyLive);
+        } else if (priceId == "yearly") {
+            checkoutUrl = await getCheckoutUrl(app, priceConfig.yearlyLive);
+        }
+        window.location.href = checkoutUrl;
+    } catch (error) {
+        console.error(error);
+    }
+}

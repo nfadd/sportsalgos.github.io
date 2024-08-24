@@ -7,7 +7,8 @@
     <link rel="manifest" href="manifest.json">
     <link rel="shortcut icon" type="image/x-icon" href="images/Algos circle logo.ico">
     <link rel="stylesheet" href="subscribe.css">
-    <title>Sign Up</title>
+    <link rel="stylesheet" href="loader.css">
+    <title>Subscribe</title>
 </head>
 <body>
     <div class="back">
@@ -15,24 +16,45 @@
     </div>
     <div class="subscribe-box">
         <div class="subscribe-header">
-            <img src="images/Algos circle logo.png" alt="Sports Algos Logo", class="logo"/>
-            <p>Sign Up</p>
+            <h2>Choose your subscription plan:</h2>
+        </div>
+        <div class="subscribe-options">
+            <button class="subscribe-button" id="monthly">
+                <img src="images/Algos circle logo.png" alt="Sports Algos Logo", class="logo"/>
+                <h3>Monthly Membership</h3>
+                <div class="subscribe-price">
+                    <p class="subscribe-amount">$30</p>
+                    <div class="subscribe-time">
+                        <p>per</p>
+                        <p>month</p>
+                    </div>
+                </div>
+            </button>
+            <button class="subscribe-button" id="yearly">
+                <img src="images/Algos circle logo.png" alt="Sports Algos Logo", class="logo"/>
+                <h3>Yearly Membership</h3>
+                <div class="subscribe-price">
+                    <p class="subscribe-amount">$325</p>
+                    <div class="subscribe-time">
+                        <p>per</p>
+                        <p>year</p>
+                    </div>
+                </div>
+            </button>
         </div>
         <div class="input-box">
-            <input type="text" class="input-field" id="sign-up-email" required>
-            <label for="email">Email</label>
+            <input type="submit" class="input-submit" id="sign-up" value="Subscribe">
         </div>
-        <div class="input-box">
-            <input type="password" class="input-field" id="sign-up-password" required>
-            <label for="password">Password</label>
-        </div>
-        <div class="input-box">
-            <input type="password" class="input-field" id="confirm-password" required>
-            <label for="confirm-password">Confirm Password</label>
-        </div>
-        <div class="input-box">
-            <input type="submit" class="input-submit" id="sign-up" value="Sign Up">
-        </div>
+    </div>
+    <div>
+        <figure id="loader">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </figure>
     </div>
 </body>
 </html>

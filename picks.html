@@ -3,12 +3,11 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <!-- <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script> -->
         <script type="module" src="picks.js"></script>
         <link rel="manifest" href="manifest.json">
         <link rel="shortcut icon" type="image/x-icon" href="images/Algos circle logo.ico">
         <link rel="stylesheet" href="picks.css">
+        <link rel="stylesheet" href="loader.css">
         <title>Picks</title>
     </head>
 
@@ -26,6 +25,9 @@
                     </div>
                 </nav>
             </div>
+            <div class="manage-subscription" id="manage-subscription">
+                <a href="#">Manage Subscription</a>
+            </div>
         </section>
 
        <div class="picks-table">
@@ -33,6 +35,8 @@
                 <label for="sports">Choose sport:</label>
                 <select name="sports" id="sports">
                     <option value="mlb">MLB</option>
+                    <option value="cfb">CFB</option>
+                    <option value="nfl">NFL</option>
                     <option value="cbb">CBB</option>
                     <option value="nba">NBA</option>
                 </select>
@@ -52,5 +56,23 @@
                 </table>
             </div>
        </div>
+       <div>
+            <figure id="loader">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </figure>
+        </div>
+        <div id="recommended">
+            <p id="suggested">Recommended</p>
+            <div id="units">
+                <p></p>
+                <p><span id="grade_A">A</span> = 2u</p>
+                <p><span id="grade_B">B</span> = 1u</p>
+            </div>
+        </div>
     </body>
 </html>
