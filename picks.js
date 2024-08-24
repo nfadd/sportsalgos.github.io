@@ -3,6 +3,7 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-
 import { query, orderBy, limit, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-auth.js";
 import { firebaseConfig } from "./firebaseConfig.js";
+import { getPortalUrl } from "./processPayment.js";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -32,6 +33,14 @@ document.getElementById("sports").addEventListener("change", (e) => {
         // console.log("MLB");
         resetTable();
         mlbTable();
+    } else if (sports == "cfb"){
+        // console.log("CFB");
+        resetTable();
+        cfbTable();
+    } else if (sports == "nfl"){
+        // console.log("NFL");
+        resetTable();
+        nflTable();
     }
 });
 
@@ -169,6 +178,96 @@ async function mlbTable() {
     gradeColor();
 }
 
+async function cfbTable() {
+    const collRef = collection(db, "cfbpicks");
+    const q = query(collRef, orderBy("date", "desc"), limit(1));
+    const docSnap = await getDocs(q);
+
+    let head = document.getElementById('picks-head');
+    head.innerHTML =    `<tr>
+                            <th>Away Team</th>
+                            <th>Home Team</th>
+                            <th>Home Win Probability</th>
+                            <th>Picks</th>
+                            <th>Grade</th>
+                            <th>Over/Under Probability</th>
+                            <th>Picks</th>
+                            <th>Grade</th>
+                        </tr>`;
+
+    docSnap.forEach(doc => {
+        for(let val in doc.data()){
+            if (val != 'date'){
+                let row = `<tr>
+                                <td>${doc.data()[val].away_team_team_stat_team.split("-").join(" ")}</td>
+                                <td>${doc.data()[val].home_team_team_stat_team.split("-").join(" ")}</td>
+                                <td>${(doc.data()[val].predicted_home_win_pct * 100).toFixed(2)}%</td>
+                                <td>${doc.data()[val].spread_picks}</td>
+                                <td>${doc.data()[val].grade}</td>
+                                <td>${(doc.data()[val].totals_proba * 100).toFixed(2)}%</td>
+                                <td>${doc.data()[val].total_points_picks}</td>
+                                <td>${doc.data()[val].totals_grade}</td>
+                            </tr>`;
+                let table = document.getElementById('picks-body');
+                table.innerHTML += row;
+            } else if (val == 'date'){
+                let epochDate = doc.data()[val];
+                let date = new Date(epochDate*1000);
+                date.setDate(date.getDate()+1);
+                let row = `<h2>${(date.getMonth()+1)+"/"+(date.getDate())+"/"+date.getFullYear()} Picks</h2>`;
+                let dateText = document.getElementById('picks-date');
+                dateText.innerHTML += row;
+            }
+        }
+    });
+    gradeColor();
+}
+
+async function nflTable() {
+    const collRef = collection(db, "nflpicks");
+    const q = query(collRef, orderBy("date", "desc"), limit(1));
+    const docSnap = await getDocs(q);
+
+    let head = document.getElementById('picks-head');
+    head.innerHTML =    `<tr>
+                            <th>Away Team</th>
+                            <th>Home Team</th>
+                            <th>Home Win Probability</th>
+                            <th>Picks</th>
+                            <th>Grade</th>
+                            <th>Over/Under Probability</th>
+                            <th>Picks</th>
+                            <th>Grade</th>
+                        </tr>`;
+
+    docSnap.forEach(doc => {
+        for(let val in doc.data()){
+            if (val != 'date'){
+                let row = `<tr>
+                                <td>${doc.data()[val].away_team_team_stat_team.split("-").join(" ")}</td>
+                                <td>${doc.data()[val].home_team_team_stat_team.split("-").join(" ")}</td>
+                                <td>${(doc.data()[val].predicted_home_win_pct * 100).toFixed(2)}%</td>
+                                <td>${doc.data()[val].spread_picks}</td>
+                                <td>${doc.data()[val].grade}</td>
+                                <td>${(doc.data()[val].totals_proba * 100).toFixed(2)}%</td>
+                                <td>${doc.data()[val].total_points_picks}</td>
+                                <td>${doc.data()[val].totals_grade}</td>
+                            </tr>`;
+                let table = document.getElementById('picks-body');
+                table.innerHTML += row;
+            } else if (val == 'date'){
+                let epochDate = doc.data()[val];
+                let date = new Date(epochDate*1000);
+                date.setDate(date.getDate()+1);
+                let row = `<h2>${(date.getMonth()+1)+"/"+(date.getDate())+"/"+date.getFullYear()} Picks</h2>`;
+                let dateText = document.getElementById('picks-date');
+                dateText.innerHTML += row;
+            }
+        }
+    });
+    gradeColor();
+}
+
 //Color Code for Picks Table
 function gradeColor() {
     const colors = {
@@ -218,4 +317,11 @@ document.getElementById("search-bar").addEventListener("keyup", (e) => {
             tr[i].style.display = "none";
         }
     }
+});
+
+document.getElementById("manage-subscription").addEventListener("click", async (e) => {
+    document.getElementById("loader").style.display = "block";
+    const portalUrl = await getPortalUrl(app);
+    window.location.href = portalUrl;
+    document.getElementById("loader").style.display = "none";
 });

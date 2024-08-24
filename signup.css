@@ -7,37 +7,87 @@
 
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
 }
 
-.login-box {
+.subscribe-box {
     position: relative;
     width: 470px;
-    height: calc(100%);
+    height: 430px;
     padding: 10px 30px;
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 10px;
 }
 
-.login-header {
+.subscribe-header {
     display: flex;
     flex-direction: column;
     text-align: center;
-    margin: 20px 0 50px 0;
+    margin: 20px 0 20px 0;
 }
 
-.login-header header {
-    font-family: 'Poppins', sans-serif;
-    color: #333;
-    font-size: 30px;
-    margin-bottom: 5px;
-}
-
-.login-header p{
+.subscribe-header p{
     color: #555;
+}
+
+.subscribe-header h2{
+    color: #444cac;
+    font-size: 24px;
+}
+
+.subscribe-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 20px 0 20px 0;
+}
+
+.subscribe-button {
+    position: relative;
+    margin: 0.5em;
+    padding: 0.5em 1em;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px gray;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid #ddd;
+}
+
+.subscribe-button h3{
+    color: #444cac;
+}
+
+.subscribe-price {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 10px;
+}
+
+.subscribe-amount {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.subscribe-time {
+    color: gray;
+    text-align: left;
+    padding-left: 5px;
+}
+
+.subscribe-button:hover {
+    opacity: 0.85;
+}
+
+.subscribe-button:active,
+.active {
+    top: 4px;
+    left: 2px;
+    box-shadow: none;
 }
 
 .input-box {
@@ -121,6 +171,7 @@ section .forgot-link {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: 10px;
 }
 
 .input-submit:hover {
@@ -131,7 +182,6 @@ section .forgot-link {
     position: absolute;
     bottom: -30px;
     right: 0;
-    font-size: 14px;
 }
 
 .sign-up p > a {
@@ -140,9 +190,11 @@ section .forgot-link {
 }
 
 .back {
-    position: absolute;
-    top: 20px;
-    left: 20px;
+    position: relative;
+    margin-top: 20px;
+    margin-left: 20px;
+    align-self: start;
+    padding-bottom: 20px;
 }
 
 .back a {
@@ -168,42 +220,14 @@ img {
 
 @media screen and (max-width: 768px) {
 
-    .login-box {
+    .subscribe-box {
         width: calc(100% - 30px);
-        height: calc(100%);
+        height: 430px;
     }
 
-    .forgot section{
-        font-size: 12px;
-    }
-
-    .manage-subscription a {
-        font-size: 12px;
-    }
-
-    .sign-up {
-        font-size: 12px;
-    }
-
-}
-
-@media screen and (max-width: 336px) {
-
-    .login-box {
-        width: calc(100% - 30px);
-        height: calc(100%);
-    }
-
-    .forgot section{
-        font-size: 11px;
-    }
-
-    .manage-subscription a {
-        font-size: 11px;
-    }
-
-    .sign-up {
-        font-size: 11px;
+    .subscribe-header h2{
+        color: #444cac;
+        font-size: larger;
     }
 
 }

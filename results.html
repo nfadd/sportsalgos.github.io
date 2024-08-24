@@ -36,16 +36,28 @@
                         <option value="cbb">CBB</option>
                         <option value="nba">NBA</option>
                         <option value="mlb">MLB</option>
+                        <option value="cfb">CFB</option>
+                        <option value="nfl">NFL</option>
                     </select>
                 </div>
-                <div class="radio-container" id="radio-container">
+                <div class="radio-container" id="radio-container-moneyline">
                     <div class="radio-bets">
                         <input type="radio" id="moneyline" name="bet-type" checked/>
                         <label for="moneyline">Moneyline</label>
                     </div>
                     <div class="radio-bets">
-                        <input type="radio" id="over-under" name="bet-type" />
-                        <label for="over-under">Over/Under</label>
+                        <input type="radio" id="over-under-moneyline" name="bet-type" />
+                        <label for="over-under-moneyline">Over/Under</label>
+                    </div>
+                </div>
+                <div class="radio-container" id="radio-container-spread">
+                    <div class="radio-bets">
+                        <input type="radio" id="spread" name="bet-type" />
+                        <label for="spread">Spread</label>
+                    </div>
+                    <div class="radio-bets">
+                        <input type="radio" id="over-under-spread" name="bet-type" />
+                        <label for="over-under-spread">Over/Under</label>
                     </div>
                 </div>
             </div>

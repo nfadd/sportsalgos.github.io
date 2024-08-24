@@ -25,23 +25,84 @@ document.getElementById("sports").addEventListener("change", (e) => {
         nbaResultsTable();
     } else if (sports == "mlb"){
         // console.log("MLB");
-        showRadioButtons();
+        hideRadioButtons();
+        showMoneylineRadioButtons();
         resetTable();
         const isMoneylineChecked = document.getElementById("moneyline").checked;
         mlbResultsTable(isMoneylineChecked);
-    }
+    } else if (sports == "cfb"){
+        // console.log("CFB");
+        hideRadioButtons();
+        showSpreadRadioButtons();
+        resetTable();
+        const isSpreadChecked = document.getElementById("spread").checked;
+        cfbResultsTable(isSpreadChecked);
+    } else if (sports == "nfl"){
+        // console.log("NFL");
+        hideRadioButtons();
+        showSpreadRadioButtons();
+        resetTable();
+        const isSpreadChecked = document.getElementById("spread").checked;
+        nflResultsTable(isSpreadChecked);
+    } 
 });
 
 document.getElementById("moneyline").addEventListener("change", (e) => {
     resetTable();
     const isMoneylineChecked = document.getElementById("moneyline").checked;
-    mlbResultsTable(isMoneylineChecked);
+    let sports = document.getElementById("sports").value;
+    switch (sports) {
+        case "mlb":
+            mlbResultsTable(isMoneylineChecked);
+            break;
+        default:
+            break;
+    }
 })
 
-document.getElementById("over-under").addEventListener("change", (e) => {
+document.getElementById("over-under-moneyline").addEventListener("change", (e) => {
     resetTable();
     const isMoneylineChecked = document.getElementById("moneyline").checked;
-    mlbResultsTable(isMoneylineChecked);
+    let sports = document.getElementById("sports").value;
+    switch (sports) {
+        case "mlb":
+            mlbResultsTable(isMoneylineChecked);
+            break;
+        default:
+            break;
+    }
+})
+
+document.getElementById("spread").addEventListener("change", (e) => {
+    resetTable();
+    const isSpreadChecked = document.getElementById("spread").checked;
+    let sports = document.getElementById("sports").value;
+    switch (sports) {
+        case "cfb":
+            cfbResultsTable(isSpreadChecked);
+            break;
+        case "nfl":
+            nflResultsTable(isSpreadChecked);
+            break;
+        default:
+            break;
+    }
+})
+
+document.getElementById("over-under-spread").addEventListener("change", (e) => {
+    resetTable();
+    const isSpreadChecked = document.getElementById("spread").checked;
+    let sports = document.getElementById("sports").value;
+    switch (sports) {
+        case "cfb":
+            cfbResultsTable(isSpreadChecked);
+            break;
+        case "nfl":
+            nflResultsTable(isSpreadChecked);
+            break;
+        default:
+            break;
+    }
 })
 
 
@@ -53,14 +114,25 @@ function resetTable(){
     dateText.innerHTML = "";
 }
 
-function showRadioButtons() {
-    let radioButtons = document.getElementById('radio-container');
+function showMoneylineRadioButtons() {
+    let radioButtons = document.getElementById('radio-container-moneyline');
     radioButtons.style.display = "flex";
+    let moneylineButton = document.getElementById('moneyline');
+    moneylineButton.checked = true;
+}
+
+function showSpreadRadioButtons() {
+    let radioButtons = document.getElementById('radio-container-spread');
+    radioButtons.style.display = "flex";
+    let spreadButton = document.getElementById('spread');
+    spreadButton.checked = true;
 }
 
 function hideRadioButtons() {
-    let radioButtons = document.getElementById('radio-container');
-    radioButtons.style.display = "none";
+    let radioButtonsMoneyline = document.getElementById('radio-container-moneyline');
+    radioButtonsMoneyline.style.display = "none";
+    let radioButtonsSpread = document.getElementById('radio-container-spread');
+    radioButtonsSpread.style.display = "none";
 }
 
 async function cbbResultsTable() {
@@ -159,6 +231,112 @@ async function mlbResultsTable(isML) {
             if (val != 'date'){
                 let row = '';
                 if(isML) {
+                    row = `<tr>
+                                <td>${doc.data()[val].grade}</td>
+                                <td>${doc.data()[val].wins}</td>
+                                <td>${doc.data()[val].losses}</td>
+                                <td>${doc.data()[val].win_pct}</td>
+                                <td>${doc.data()[val]['profit (units)']}</td>
+                            </tr>`;
+                } else {
+                    count++;
+                    if (count <= 5) {
+                        row = `<tr>
+                                    <td>${doc.data()[val].grade}</td>
+                                    <td>${doc.data()[val].totals_wins}</td>
+                                    <td>${doc.data()[val].totals_losses}</td>
+                                    <td>${doc.data()[val].totals_win_pct}</td>
+                                    <td>${doc.data()[val]['totals profit (units)']}</td>
+                                </tr>`;
+                    }
+                }
+                let table = document.getElementById('results-body');
+                table.innerHTML += row;
+            } else if (val == 'date'){
+                let epochDate = doc.data()[val];
+                let date = new Date(epochDate*1000);
+                let row = `<h2>Updated through games on ${(date.getMonth()+1)+"/"+(date.getDate())+"/"+date.getFullYear()}</h2>`;
+                let dateText = document.getElementById('results-date');
+                dateText.innerHTML += row;
+            }
+        }
+    });
+    gradeColor();
+}
+
+async function cfbResultsTable(isSpread) {
+    const collRef = collection(db, "cfbrecords");
+    const q = query(collRef, orderBy("date", "desc"), limit(1));
+    const docSnap = await getDocs(q);
+
+    let head = document.getElementById('results-head');
+    head.innerHTML =    `<tr>
+                            <th>Grade</th>
+                            <th>Wins</th>
+                            <th>Losses</th>
+                            <th>Percent</th>
+                            <th>Results</th>
+                        </tr>`;
+
+    let count = 0;
+    docSnap.forEach(doc => {
+        for(let val in doc.data()){
+            if (val != 'date'){
+                let row = '';
+                if(isSpread) {
+                    row = `<tr>
+                                <td>${doc.data()[val].grade}</td>
+                                <td>${doc.data()[val].wins}</td>
+                                <td>${doc.data()[val].losses}</td>
+                                <td>${doc.data()[val].win_pct}</td>
+                                <td>${doc.data()[val]['profit (units)']}</td>
+                            </tr>`;
+                } else {
+                    count++;
+                    if (count <= 5) {
+                        row = `<tr>
+                                    <td>${doc.data()[val].grade}</td>
+                                    <td>${doc.data()[val].totals_wins}</td>
+                                    <td>${doc.data()[val].totals_losses}</td>
+                                    <td>${doc.data()[val].totals_win_pct}</td>
+                                    <td>${doc.data()[val]['totals profit (units)']}</td>
+                                </tr>`;
+                    }
+                }
+                let table = document.getElementById('results-body');
+                table.innerHTML += row;
+            } else if (val == 'date'){
+                let epochDate = doc.data()[val];
+                let date = new Date(epochDate*1000);
+                let row = `<h2>Updated through games on ${(date.getMonth()+1)+"/"+(date.getDate())+"/"+date.getFullYear()}</h2>`;
+                let dateText = document.getElementById('results-date');
+                dateText.innerHTML += row;
+            }
+        }
+    });
+    gradeColor();
+}
+
+async function nflResultsTable(isSpread) {
+    const collRef = collection(db, "nflrecords");
+    const q = query(collRef, orderBy("date", "desc"), limit(1));
+    const docSnap = await getDocs(q);
+
+    let head = document.getElementById('results-head');
+    head.innerHTML =    `<tr>
+                            <th>Grade</th>
+                            <th>Wins</th>
+                            <th>Losses</th>
+                            <th>Percent</th>
+                            <th>Results</th>
+                        </tr>`;
+
+    let count = 0;
+    docSnap.forEach(doc => {
+        for(let val in doc.data()){
+            if (val != 'date'){
+                let row = '';
+                if(isSpread) {
                     row = `<tr>
                                 <td>${doc.data()[val].grade}</td>
                                 <td>${doc.data()[val].wins}</td>
