@@ -632,7 +632,7 @@ header {
 }
 
 table {
-    margin: 25px auto;
+    margin: 25px auto 25px;
     border-collapse: collapse;
     font-family: sans-serif;
     text-align: center;
@@ -664,36 +664,6 @@ table tbody tr {
         width: calc(100% - 40px);
         font-size: 12px;
     }
-
-    .container {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .border {
-        width: 100%;
-        border-top: solid 1px #dfdfdf;
-    }
-
-    .nav-toggle {
-        display: block;
-    }
-
-    .navbar-nav {
-        flex-direction: column;
-        height: 0;
-        overflow: hidden;
-    }
-
-    .nav-item {
-        text-align: left;
-        justify-content: left;
-        padding-left: 0px;
-    }
-
-    .open {
-        height: 100vh;
-    }
 }
 
 .back {
@@ -723,15 +693,7 @@ table tbody tr {
     font-family: sans-serif;
 }
 
-#search-bar {
-    margin: 25px auto 25px;
-    padding: 12px 20px;
-    display: flex;
-    width: 50%;
-    border: 1px solid #8a8989;
-}
-
-/* .manage-subscription {
+.manage-subscription {
     position: absolute;
     top: 20px;
     right: 20px;
@@ -746,99 +708,12 @@ table tbody tr {
 
 .manage-subscription:hover {
     opacity: .9;
-} */
-
-.sortable { 
-    cursor: pointer;
 }
 
-.sortable::after { 
-    content: " ↕"; 
-}
-
-.sortable.asc::after { 
-    content: " ↑"; 
-}
-
-.sortable.desc::after { 
-    content: " ↓"; 
-}
-
-.picks-table {
-    padding-bottom: 25px;
-}
-
-.navbar {
-    display: flex;
-    /* justify-content: space-between; */
-    align-items: flex-start;
-    /* padding: 1rem 1.5rem; */
-    position: absolute;
-    top: 20px;
-    right: 20px;
-}
-
-.nav-toggle {
-    display: none;
-    position: absolute;
-    top: 2.5rem;
-    right: 1rem;
-}
-
-.navbar-nav {
-    list-style-type: none;
-    display: flex;
-    flex-direction: column;
-    /* align-items: flex-start; */
-    /* justify-content: end; */
-    /* width: 100%; */
-}
-
-.nav-item {
+.streamlit-container {
     display: flex;
     align-items: center;
-    padding: 5px 20px;
-    /* padding-left: 20px;
-    padding-bottom: 10px;
-    padding-top: 10px; */
-    text-decoration: none;
-}
-
-.navbar ul li a img:hover {
-    opacity: 0.5;
-}
-
-/* .navbar li {
-    margin-left: 5rem;
-} */
-
-.navbar ul li a:hover {
-    color: #7db0f2;
-}
-
-.navbar li a {
-    text-decoration: none;
-}
-
-.navbar ul ul li a {
-    padding: 10px 20px;
-    text-decoration: none;
-}
-
-.navbar ul ul.list {
-    position: absolute;
-    top: 100%;
-    display: none;
-}
-
-.navbar ul ul li {
-    display: block;
-}
-
-.navbar li:hover ul {
-    display: block;
-}
-
-.hidden {
-    display: none;
+    justify-content: center;
+    margin: 20px;
+    height: 800px;
 }

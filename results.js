@@ -44,6 +44,13 @@ document.getElementById("sports").addEventListener("change", (e) => {
         resetTable();
         const isSpreadChecked = document.getElementById("spread").checked;
         nflResultsTable(isSpreadChecked);
+    }  else if (sports == "nhl"){
+        // console.log("NHL");
+        hideRadioButtons();
+        showMoneylineRadioButtons();
+        resetTable();
+        const isMoneylineChecked = document.getElementById("moneyline").checked;
+        nhlResultsTable(isMoneylineChecked);
     } 
 });
 
@@ -54,6 +61,9 @@ document.getElementById("moneyline").addEventListener("change", (e) => {
     switch (sports) {
         case "mlb":
             mlbResultsTable(isMoneylineChecked);
+            break;
+        case "nhl":
+            nhlResultsTable(isMoneylineChecked);
             break;
         default:
             break;
@@ -67,6 +77,9 @@ document.getElementById("over-under-moneyline").addEventListener("change", (e) =
     switch (sports) {
         case "mlb":
             mlbResultsTable(isMoneylineChecked);
+            break;
+        case "nhl":
+            nhlResultsTable(isMoneylineChecked);
             break;
         default:
             break;
@@ -337,6 +350,59 @@ async function nflResultsTable(isSpread) {
             if (val != 'date'){
                 let row = '';
                 if(isSpread) {
+                    row = `<tr>
+                                <td>${doc.data()[val].grade}</td>
+                                <td>${doc.data()[val].wins}</td>
+                                <td>${doc.data()[val].losses}</td>
+                                <td>${doc.data()[val].win_pct}</td>
+                                <td>${doc.data()[val]['profit (units)']}</td>
+                            </tr>`;
+                } else {
+                    count++;
+                    if (count <= 5) {
+                        row = `<tr>
+                                    <td>${doc.data()[val].grade}</td>
+                                    <td>${doc.data()[val].totals_wins}</td>
+                                    <td>${doc.data()[val].totals_losses}</td>
+                                    <td>${doc.data()[val].totals_win_pct}</td>
+                                    <td>${doc.data()[val]['totals profit (units)']}</td>
+                                </tr>`;
+                    }
+                }
+                let table = document.getElementById('results-body');
+                table.innerHTML += row;
+            } else if (val == 'date'){
+                let epochDate = doc.data()[val];
+                let date = new Date(epochDate*1000);
+                let row = `<h2>Updated through games on ${(date.getMonth()+1)+"/"+(date.getDate())+"/"+date.getFullYear()}</h2>`;
+                let dateText = document.getElementById('results-date');
+                dateText.innerHTML += row;
+            }
+        }
+    });
+    gradeColor();
+}
+
+async function nhlResultsTable(isML) {
+    const collRef = collection(db, "nhlrecords");
+    const q = query(collRef, orderBy("date", "desc"), limit(1));
+    const docSnap = await getDocs(q);
+
+    let head = document.getElementById('results-head');
+    head.innerHTML =    `<tr>
+                            <th>Grade</th>
+                            <th>Wins</th>
+                            <th>Losses</th>
+                            <th>Percent</th>
+                            <th>Results</th>
+                        </tr>`;
+
+    let count = 0;
+    docSnap.forEach(doc => {
+        for(let val in doc.data()){
+            if (val != 'date'){
+                let row = '';
+                if(isML) {
                     row = `<tr>
                                 <td>${doc.data()[val].grade}</td>
                                 <td>${doc.data()[val].wins}</td>

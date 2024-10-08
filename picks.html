@@ -14,20 +14,39 @@
     <body>
         <section id="header">
             <div class="back">
-                <a href="index.html">&larr; Back</a>
+                <a href="member_landing_page.html">&larr; Back</a>
             </div>
             <div class="header-upper">
-                <nav class="navbar">
+                <!-- <nav class="navbar"> -->
                     <div class="container">
                         <a class="image" href="index.html">
                             <img src="images/Algos Logo.png" alt="Sports Algos Logo", class="logo"/>
                         </a>
                     </div>
-                </nav>
+                <!-- </nav> -->
             </div>
-            <div class="manage-subscription" id="manage-subscription">
+            <!-- <div class="manage-subscription" id="manage-subscription">
                 <a href="#">Manage Subscription</a>
+            </div> -->
+            <div class="nav-toggle">
+                <img id="navClosed" class="navIcon" src="https://www.richardmiddleton.me/wp-content/themes/richardcodes/assets/img/hamburger.svg" alt="hamburger menu">
+                <img id="navOpen" class="navIcon hidden" src="https://www.richardmiddleton.me/wp-content/themes/richardcodes/assets/img/close.svg" alt="close hamburger">
             </div>
+            <nav class="navbar">
+                <div class="navbar-collapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="picks.html" style="font-size: 18px; font-weight: 400;">Game Predictions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="analysis.html" style="font-size: 18px; font-weight: 400;">Stats Analysis</a>
+                        </li>
+                        <li class="nav-item manage-subscription" id="manage-subscription">
+                            <a href="#" style="font-size: 18px; font-weight: 400;">Manage Subscription</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </section>
 
        <div class="picks-table">
@@ -39,6 +58,7 @@
                     <option value="nfl">NFL</option>
                     <option value="cbb">CBB</option>
                     <option value="nba">NBA</option>
+                    <option value="nhl">NHL</option>
                 </select>
             </div>
             <div class="picks-table">
@@ -46,7 +66,7 @@
                 <div id='picks-date'>
                     
                 </div>
-                <table class="sortable" id="picks-table">
+                <table id="picks-table">
                     <thead id="picks-head">
                         
                     </thead>
@@ -74,5 +94,12 @@
                 <p><span id="grade_B">B</span> = 1u</p>
             </div>
         </div>
+
+        <!-- <iframe
+            src="https://models-nqwojsvxamihjg3ds9g62p.streamlit.app/?embed=true"
+            width="80%"
+            height="100%"
+            frameborder="0">
+        </iframe> -->
     </body>
 </html>
