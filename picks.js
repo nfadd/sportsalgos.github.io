@@ -282,6 +282,8 @@ async function nhlTable() {
     const q = query(collRef, orderBy("date", "desc"), limit(1));
     const docSnap = await getDocs(q);
 
+    console.log(docSnap)
+
     let head = document.getElementById('picks-head');
     head.innerHTML =    `<tr>
                             <th>Away Team</th>
@@ -298,8 +300,8 @@ async function nhlTable() {
         for(let val in doc.data()){
             if (val != 'date'){
                 let row = `<tr>
-                                <td>${doc.data()[val].away_team_stats_team.split("-").join(" ")}</td>
-                                <td>${doc.data()[val].home_team_stats_team.split("-").join(" ")}</td>
+                                <td>${doc.data()[val].away_team_stat_nst_stat_team.split("-").join(" ")}</td>
+                                <td>${doc.data()[val].home_team_stat_nst_stat_team.split("-").join(" ")}</td>
                                 <td>${(doc.data()[val].win_pct_proba * 100).toFixed(2)}%</td>
                                 <td>${doc.data()[val].win_pct_picks}</td>
                                 <td>${doc.data()[val].grade}</td>
