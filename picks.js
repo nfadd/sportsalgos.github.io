@@ -41,6 +41,10 @@ document.getElementById("sports").addEventListener("change", (e) => {
         // console.log("NFL");
         resetTable();
         nflTable();
+    } else if (sports == "nhl"){
+        // console.log("NHL");
+        resetTable();
+        nhlTable();
     }
 });
 
@@ -66,7 +70,7 @@ async function cbbTable() {
                             <th>Home Team</th>
                             <th>Predicted Home Spread</th>
                             <th>Picks</th>
-                            <th>Grade</th>
+                            <th class="sortable">Grade</th>
                         </tr>`;
 
     docSnap.forEach(doc => {
@@ -92,6 +96,7 @@ async function cbbTable() {
         }
     });
     gradeColor();
+    initializeSortableTable('picks-table');
 }
 
 async function nbaTable() {
@@ -105,7 +110,7 @@ async function nbaTable() {
                             <th>Home Team</th>
                             <th>Predicted Home Spread</th>
                             <th>Picks</th>
-                            <th>Grade</th>
+                            <th class="sortable">Grade</th>
                         </tr>`;
 
     docSnap.forEach(doc => {
@@ -131,6 +136,7 @@ async function nbaTable() {
         }
     });
     gradeColor();
+    initializeSortableTable('picks-table');
 }
 
 async function mlbTable() {
@@ -144,10 +150,10 @@ async function mlbTable() {
                             <th>Home Team</th>
                             <th>Win Probability</th>
                             <th>Picks</th>
-                            <th>Grade</th>
+                            <th class="sortable">Grade</th>
                             <th>Over/Under Probability</th>
                             <th>Picks</th>
-                            <th>Grade</th>
+                            <th class="sortable">Grade</th>
                         </tr>`;
 
     docSnap.forEach(doc => {
@@ -176,6 +182,7 @@ async function mlbTable() {
         }
     });
     gradeColor();
+    initializeSortableTable('picks-table');
 }
 
 async function cfbTable() {
@@ -189,10 +196,10 @@ async function cfbTable() {
                             <th>Home Team</th>
                             <th>Home Win Probability</th>
                             <th>Picks</th>
-                            <th>Grade</th>
+                            <th class="sortable">Grade</th>
                             <th>Over/Under Probability</th>
                             <th>Picks</th>
-                            <th>Grade</th>
+                            <th class="sortable">Grade</th>
                         </tr>`;
 
     docSnap.forEach(doc => {
@@ -221,6 +228,7 @@ async function cfbTable() {
         }
     });
     gradeColor();
+    initializeSortableTable('picks-table');
 }
 
 async function nflTable() {
@@ -234,10 +242,10 @@ async function nflTable() {
                             <th>Home Team</th>
                             <th>Home Win Probability</th>
                             <th>Picks</th>
-                            <th>Grade</th>
+                            <th class="sortable">Grade</th>
                             <th>Over/Under Probability</th>
                             <th>Picks</th>
-                            <th>Grade</th>
+                            <th class="sortable">Grade</th>
                         </tr>`;
 
     docSnap.forEach(doc => {
@@ -266,6 +274,53 @@ async function nflTable() {
         }
     });
     gradeColor();
+    initializeSortableTable('picks-table');
+}
+
+async function nhlTable() {
+    const collRef = collection(db, "nhlpicks");
+    const q = query(collRef, orderBy("date", "desc"), limit(1));
+    const docSnap = await getDocs(q);
+
+    let head = document.getElementById('picks-head');
+    head.innerHTML =    `<tr>
+                            <th>Away Team</th>
+                            <th>Home Team</th>
+                            <th>Win Probability</th>
+                            <th>Picks</th>
+                            <th class="sortable">Grade</th>
+                            <th>Over/Under Probability</th>
+                            <th>Picks</th>
+                            <th class="sortable">Grade</th>
+                        </tr>`;
+
+    docSnap.forEach(doc => {
+        for(let val in doc.data()){
+            if (val != 'date'){
+                let row = `<tr>
+                                <td>${doc.data()[val].away_team_stats_team.split("-").join(" ")}</td>
+                                <td>${doc.data()[val].home_team_stats_team.split("-").join(" ")}</td>
+                                <td>${(doc.data()[val].win_pct_proba * 100).toFixed(2)}%</td>
+                                <td>${doc.data()[val].win_pct_picks}</td>
+                                <td>${doc.data()[val].grade}</td>
+                                <td>${(doc.data()[val].totals_proba * 100).toFixed(2)}%</td>
+                                <td>${doc.data()[val].total_points_picks}</td>
+                                <td>${doc.data()[val].totals_grade}</td>
+                            </tr>`;
+                let table = document.getElementById('picks-body');
+                table.innerHTML += row;
+            } else if (val == 'date'){
+                let epochDate = doc.data()[val];
+                let date = new Date(epochDate*1000);
+                date.setDate(date.getDate()+1);
+                let row = `<h2>${(date.getMonth()+1)+"/"+(date.getDate())+"/"+date.getFullYear()} Picks</h2>`;
+                let dateText = document.getElementById('picks-date');
+                dateText.innerHTML += row;
+            }
+        }
+    });
+    gradeColor();
+    initializeSortableTable('picks-table');
 }
 
 //Color Code for Picks Table
@@ -325,3 +380,83 @@ document.getElementById("manage-subscription").addEventListener("click", async (
     window.location.href = portalUrl;
     document.getElementById("loader").style.display = "none";
 });
+
+function initializeSortableTable(tableId) {
+    const table = document.getElementById(tableId);
+    if (!table) {
+        console.error(`Table with id "${tableId}" not found.`);
+        return;
+    }
+
+    const headers = table.querySelectorAll('th.sortable');
+    const tbody = table.querySelector('tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    const originalOrder = [...rows];
+
+    headers.forEach(header => {
+        header.sortDirection = 0; // 0: no sort, 1: ascending, -1: descending
+        header.addEventListener('click', () => {
+            const column = header.cellIndex;
+
+            // Reset other headers
+            headers.forEach(h => {
+                if (h !== header) {
+                    h.sortDirection = 0;
+                    h.classList.remove('asc', 'desc');
+                }
+            });
+
+            // Cycle through sort states
+            header.sortDirection = (header.sortDirection + 2) % 3 - 1;
+
+            // Update header appearance
+            header.classList.remove('asc', 'desc');
+            if (header.sortDirection === 1) header.classList.add('asc');
+            if (header.sortDirection === -1) header.classList.add('desc');
+
+            // Sort rows
+            if (header.sortDirection === 0) {
+                tbody.append(...originalOrder);
+            } else {
+                rows.sort((a, b) => {
+                    const aValue = a.cells[column].textContent.trim();
+                    const bValue = b.cells[column].textContent.trim();
+                    const comparison = isNaN(aValue) ? 
+                        aValue.localeCompare(bValue) : 
+                        parseFloat(aValue) - parseFloat(bValue);
+                    return comparison * header.sortDirection;
+                });
+                tbody.append(...rows);
+            }
+        });
+    });
+}
+
+const navToggle = document.querySelector(".nav-toggle");
+const navClosedIcon = document.querySelector("#navClosed");
+const navOpenIcon = document.querySelector("#navOpen");
+const navIcon = document.querySelectorAll(".navIcon");
+const nav = document.querySelector(".navbar-nav");
+const navbar = document.querySelector(".navbar");
+
+navToggle.addEventListener("click", () => {
+  nav.classList.toggle("open");
+  navbar.classList.toggle("border");
+  navIcon.forEach((icon) => {
+    icon.classList.toggle("hidden");
+  });
+});
+
+window.addEventListener(
+  "resize", () => {
+    if (document.body.clientWidth > 768) {
+      nav.classList.remove("open");
+      navbar.classList.remove("border");
+      navIcon.forEach((icon) => {
+        icon.classList.remove("hidden");
+      });
+      navOpenIcon.classList.add("hidden");
+    }
+  },
+  { passive: false }
+);

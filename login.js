@@ -22,7 +22,8 @@ document.getElementById("submit").addEventListener("click", (e) => {
 
             const status = await getStatus(app);
             if (status) {
-                window.location.href = "picks.html";
+                // window.location.href = "picks.html";
+                window.location.href = "member_landing_page.html";
             } else {
                 alert("No active subscriptions found");
                 window.location.href = "subscribe.html";
