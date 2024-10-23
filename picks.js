@@ -108,7 +108,10 @@ async function nbaTable() {
     head.innerHTML =    `<tr>
                             <th>Away Team</th>
                             <th>Home Team</th>
-                            <th>Predicted Home Spread</th>
+                            <th>Home Win Probability</th>
+                            <th>Picks</th>
+                            <th class="sortable">Grade</th>
+                            <th>Over/Under Probability</th>
                             <th>Picks</th>
                             <th class="sortable">Grade</th>
                         </tr>`;
@@ -119,9 +122,12 @@ async function nbaTable() {
                 let row = `<tr>
                                 <td>${doc.data()[val].away_team_team_stat_team.split("-").join(" ")}</td>
                                 <td>${doc.data()[val].home_team_team_stat_team.split("-").join(" ")}</td>
-                                <td>${doc.data()[val].predicted_spread}</td>
+                                <td>${(doc.data()[val].predicted_home_win_pct * 100).toFixed(2)}%</td>
                                 <td>${doc.data()[val].spread_picks}</td>
                                 <td>${doc.data()[val].grade}</td>
+                                <td>${(doc.data()[val].totals_proba * 100).toFixed(2)}%</td>
+                                <td>${doc.data()[val].total_points_picks}</td>
+                                <td>${doc.data()[val].totals_grade}</td>
                             </tr>`;
                 let table = document.getElementById('picks-body');
                 table.innerHTML += row;
@@ -148,7 +154,7 @@ async function mlbTable() {
     head.innerHTML =    `<tr>
                             <th>Away Team</th>
                             <th>Home Team</th>
-                            <th>Win Probability</th>
+                            <th>Home Win Probability</th>
                             <th>Picks</th>
                             <th class="sortable">Grade</th>
                             <th>Over/Under Probability</th>
